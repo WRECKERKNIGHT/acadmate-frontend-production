@@ -1,0 +1,455 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800;900&family=Outfit:wght@300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import './styles/enhanced-premium.css';
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Pure Black Dark Theme Variables */
+:root {
+  /* Pure Black Backgrounds */
+  --color-bg-primary: #000000;
+  --color-bg-secondary: #0a0a0a;
+  --color-bg-tertiary: #141414;
+  --color-bg-elevated: #1f1f1f;
+  --color-bg-glass: rgba(0, 0, 0, 0.9);
+  --color-bg-card: rgba(10, 10, 10, 0.95);
+  --color-bg-hover: rgba(20, 20, 20, 0.98);
+  
+  /* High Contrast Text */
+  --color-text-primary: #ffffff;
+  --color-text-secondary: #f0f0f0;
+  --color-text-tertiary: #b0b0b0;
+  --color-text-muted: #808080;
+  
+  /* Neon Accent Colors */
+  --color-primary: #00d4ff;
+  --color-primary-hover: #00bfea;
+  --color-secondary: #ff006e;
+  --color-success: #00ff88;
+  --color-warning: #ffaa00;
+  --color-danger: #ff3366;
+  
+  /* Premium Neon Gradients */
+  --gradient-primary: linear-gradient(135deg, #00d4ff 0%, #ff006e 50%, #8a2be2 100%);
+  --gradient-success: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%);
+  --gradient-warning: linear-gradient(135deg, #ffaa00 0%, #ff6600 100%);
+  --gradient-danger: linear-gradient(135deg, #ff3366 0%, #ff006e 100%);
+  --gradient-purple: linear-gradient(135deg, #8a2be2 0%, #4b0082 100%);
+  --gradient-hero: linear-gradient(135deg, #00d4ff 0%, #ff006e 25%, #8a2be2 50%, #00ff88 75%, #00d4ff 100%);
+  
+  /* Neon Glows */
+  --glow-primary: 0 0 20px rgba(0, 212, 255, 0.5);
+  --glow-secondary: 0 0 20px rgba(255, 0, 110, 0.5);
+  --glow-success: 0 0 20px rgba(0, 255, 136, 0.5);
+  --glow-purple: 0 0 20px rgba(138, 43, 226, 0.5);
+}
+
+/* Pure Black Base Styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: var(--color-bg-primary);
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: var(--color-bg-primary) !important;
+  color: var(--color-text-primary) !important;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  min-height: 100vh;
+}
+
+/* Ensure all elements use dark theme */
+#root {
+  background: var(--color-bg-primary) !important;
+  color: var(--color-text-primary) !important;
+  min-height: 100vh;
+}
+
+/* Premium Black Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--gradient-primary);
+  border-radius: 4px;
+  border: 1px solid var(--color-bg-primary);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  box-shadow: var(--glow-primary);
+}
+
+/* Premium Black Glass Effect */
+.glass {
+  background: var(--color-bg-glass) !important;
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* Gradient backgrounds */
+.gradient-primary {
+  background: var(--gradient-primary);
+}
+
+.gradient-success {
+  background: var(--gradient-success);
+}
+
+.gradient-warning {
+  background: var(--gradient-warning);
+}
+
+.gradient-purple {
+  background: var(--gradient-purple);
+}
+
+/* Custom animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200px 0;
+  }
+  100% {
+    background-position: calc(200px + 100%) 0;
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.animate-pulse-slow {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-shimmer {
+  animation: shimmer 1.5s ease-in-out infinite;
+  background: linear-gradient(
+    90deg,
+    rgba(148, 163, 184, 0.1) 0%,
+    rgba(148, 163, 184, 0.2) 50%,
+    rgba(148, 163, 184, 0.1) 100%
+  );
+  background-size: 200px 100%;
+}
+
+/* Focus visible for accessibility */
+.focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: white;
+}
+
+/* Typography improvements */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+p {
+  color: var(--color-text-secondary);
+}
+
+/* Button focus states */
+button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* Input focus states */
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-primary);
+}
+
+/* Disabled states */
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Loading skeleton */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-secondary) 0%,
+    var(--color-bg-tertiary) 50%,
+    var(--color-bg-secondary) 100%
+  );
+  background-size: 200px 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@layer base {
+  * {
+    @apply border-gray-800;
+  }
+  
+  body {
+    @apply font-sans;
+    background: var(--color-bg-primary) !important;
+    color: var(--color-text-primary) !important;
+    font-feature-settings: 'cv11', 'ss01';
+    font-variation-settings: 'opsz' 32;
+  }
+  
+  /* Black theme selection */
+  ::selection {
+    background: var(--gradient-primary);
+    color: white;
+    -webkit-text-fill-color: white;
+  }
+}
+
+@layer components {
+  /* Pure Black Theme Components */
+  .btn {
+    @apply inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed;
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  
+  .btn-primary {
+    background: var(--gradient-primary) !important;
+    color: white !important;
+    box-shadow: var(--glow-primary);
+    border: none;
+  }
+  
+  .btn-secondary {
+    background: var(--color-bg-tertiary) !important;
+    color: var(--color-text-primary) !important;
+    border: 1px solid var(--color-secondary);
+  }
+  
+  .btn-success {
+    background: var(--gradient-success) !important;
+    color: white !important;
+    box-shadow: var(--glow-success);
+  }
+  
+  .btn-danger {
+    background: var(--gradient-danger) !important;
+    color: white !important;
+  }
+  
+  .card {
+    background: var(--color-bg-card) !important;
+    color: var(--color-text-primary) !important;
+    border: 1px solid rgba(255, 255, 255, 0.05) !important;
+    @apply rounded-xl p-6;
+    backdrop-filter: blur(20px);
+  }
+  
+  .card-hover {
+    @apply card transition-all duration-300 cursor-pointer;
+  }
+  
+  .card-hover:hover {
+    background: var(--color-bg-hover) !important;
+    transform: translateY(-4px);
+    box-shadow: var(--glow-primary);
+  }
+  
+  .input {
+    @apply w-full rounded-lg px-3 py-2 text-sm transition-all duration-200;
+    background: var(--color-bg-secondary) !important;
+    color: var(--color-text-primary) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+  
+  .input:focus {
+    border-color: var(--color-primary) !important;
+    box-shadow: var(--glow-primary) !important;
+  }
+  
+  .input::placeholder {
+    color: var(--color-text-muted) !important;
+  }
+  
+  .label {
+    @apply block text-sm font-medium mb-1;
+    color: var(--color-text-secondary) !important;
+  }
+  
+  .badge {
+    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium;
+    background: var(--color-bg-tertiary) !important;
+    color: var(--color-text-primary) !important;
+  }
+  
+  /* Loading states - Black theme */
+  .skeleton {
+    background: linear-gradient(90deg, var(--color-bg-secondary) 25%, var(--color-bg-tertiary) 50%, var(--color-bg-secondary) 75%);
+    background-size: 200% 100%;
+    @apply animate-pulse rounded;
+  }
+  
+  /* Premium gradient text */
+  .gradient-text {
+    background: var(--gradient-hero);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  
+  .text-pretty {
+    text-wrap: pretty;
+  }
+  
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .bg-gradient-radial {
+    background: radial-gradient(ellipse at center, var(--tw-gradient-stops));
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+}
+
+/* Animation for page transitions */
+.page-transition-enter {
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.page-transition-enter-active {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 300ms ease-out, transform 300ms ease-out;
+}
+
+.page-transition-exit {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.page-transition-exit-active {
+  opacity: 0;
+  transform: translateY(-20px);
+  transition: opacity 300ms ease-in, transform 300ms ease-in;
+}
+
+/* Custom animations for specific components */
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.slide-up {
+  animation: slideUp 0.3s ease-out;
+}
+
+/* Test interface specific styles */
+.question-card {
+  @apply card hover:shadow-medium transition-all duration-300;
+}
+
+.question-card.active {
+  @apply border-primary-300 shadow-glow;
+}
+
+.question-card.answered {
+  @apply border-success-300 bg-success-50/50;
+}
+
+.question-card.flagged {
+  @apply border-warning-300 bg-warning-50/50;
+}
+
+/* Dashboard specific styles */
+.stat-card {
+  @apply card text-center;
+}
+
+.stat-card-primary {
+  @apply stat-card border-primary-200 bg-gradient-to-br from-primary-50 to-primary-100;
+}
+
+.stat-card-success {
+  @apply stat-card border-success-200 bg-gradient-to-br from-success-50 to-success-100;
+}
+
+.stat-card-warning {
+  @apply stat-card border-warning-200 bg-gradient-to-br from-warning-50 to-warning-100;
+}
+
+.stat-card-danger {
+  @apply stat-card border-danger-200 bg-gradient-to-br from-danger-50 to-danger-100;
+}

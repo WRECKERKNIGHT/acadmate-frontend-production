@@ -1,0 +1,412 @@
+/* Premium Responsive Design Enhancements */
+
+/* Mobile-first approach with premium dark theme */
+@media (max-width: 640px) {
+  /* Mobile Layout Adjustments */
+  .min-h-screen {
+    min-height: 100vh;
+    min-height: 100dvh; /* Dynamic viewport height for mobile */
+  }
+
+  /* Premium cards mobile optimization */
+  .premium-card,
+  .stat-card-premium,
+  .glass-card {
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+  }
+
+  /* Button adjustments for mobile */
+  .btn-premium,
+  .btn-neon,
+  .glass-button {
+    padding: 12px 20px;
+    font-size: 14px;
+    border-radius: 10px;
+    min-height: 44px; /* Touch target size */
+    min-width: 44px;
+  }
+
+  /* Text scaling for mobile readability */
+  .text-3xl {
+    font-size: 1.875rem;
+  }
+  
+  .text-4xl {
+    font-size: 2.25rem;
+  }
+
+  /* Grid adjustments */
+  .grid-cols-1 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  .grid-cols-2 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+
+  /* Navigation adjustments */
+  .nav-glass {
+    padding: 8px 16px;
+  }
+
+  /* Header adjustments */
+  .dashboard-header {
+    padding: 12px 16px;
+  }
+
+  /* Stats cards mobile layout */
+  .stats-grid-mobile {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  /* Login form mobile optimization */
+  .login-container {
+    padding: 16px;
+  }
+
+  .login-card {
+    padding: 24px 20px;
+  }
+
+  /* Demo credentials mobile layout */
+  .demo-credentials-mobile {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .demo-credentials-mobile .demo-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  /* Mobile navigation tabs */
+  .nav-tabs-mobile {
+    display: flex;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    gap: 8px;
+    padding: 0 16px;
+  }
+
+  .nav-tabs-mobile::-webkit-scrollbar {
+    display: none;
+  }
+
+  .nav-tab-mobile {
+    flex-shrink: 0;
+    white-space: nowrap;
+    padding: 8px 16px;
+    font-size: 14px;
+    min-width: auto;
+  }
+
+  /* Modal adjustments for mobile */
+  .modal-mobile {
+    margin: 16px;
+    max-height: calc(100vh - 32px);
+    border-radius: 16px;
+  }
+
+  /* Input field mobile optimization */
+  .input-premium {
+    font-size: 16px; /* Prevent zoom on iOS */
+    padding: 16px;
+  }
+
+  /* Table responsive behavior */
+  .table-responsive {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  /* Hide non-essential elements on mobile */
+  .desktop-only {
+    display: none !important;
+  }
+
+  .mobile-only {
+    display: block !important;
+  }
+}
+
+/* Tablet optimizations */
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* Tablet-specific adjustments */
+  .premium-card,
+  .stat-card-premium {
+    padding: 20px;
+  }
+
+  /* Grid adjustments for tablet */
+  .grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .grid-cols-3 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  /* Navigation tabs for tablet */
+  .nav-tabs-tablet {
+    gap: 16px;
+    justify-content: center;
+  }
+
+  /* Stats layout for tablet */
+  .stats-grid-tablet {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .mobile-only {
+    display: none !important;
+  }
+
+  .tablet-only {
+    display: block !important;
+  }
+}
+
+/* Desktop optimizations */
+@media (min-width: 1025px) {
+  .mobile-only,
+  .tablet-only {
+    display: none !important;
+  }
+
+  .desktop-only {
+    display: block !important;
+  }
+
+  /* Enhanced animations for desktop */
+  .premium-card:hover {
+    transform: translateY(-8px);
+  }
+
+  .stat-card-premium:hover {
+    transform: translateY(-4px);
+  }
+
+  /* Full grid layout for desktop */
+  .stats-grid-desktop {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+}
+
+/* Ultra-wide screen optimizations */
+@media (min-width: 1920px) {
+  .container-xl {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+
+  .stats-grid-ultrawide {
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+/* Touch device optimizations */
+@media (hover: none) and (pointer: coarse) {
+  /* Touch-friendly interactions */
+  .btn-premium,
+  .btn-neon,
+  .glass-button {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 14px 24px;
+  }
+
+  /* Remove hover effects on touch devices */
+  .hover\\:scale-105:hover {
+    transform: none;
+  }
+
+  /* Enhance tap targets */
+  .tap-target {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 12px;
+  }
+
+  /* Simplified animations for touch devices */
+  .animate-float-gentle,
+  .animate-spin-slow,
+  .animate-gradient-x {
+    animation-duration: 4s;
+    animation-timing-function: ease-in-out;
+  }
+}
+
+/* High DPI display optimizations */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* Sharper borders and shadows for retina displays */
+  .glass-card,
+  .premium-card,
+  .stat-card-premium {
+    border-width: 0.5px;
+  }
+
+  /* Enhanced gradients for high DPI */
+  .bg-gradient-neon,
+  .text-gradient {
+    background-size: 200% 200%;
+  }
+}
+
+/* Dark mode preference support */
+@media (prefers-color-scheme: dark) {
+  /* Ensure dark theme is applied even without explicit class */
+  :root {
+    color-scheme: dark;
+  }
+}
+
+/* Reduced motion accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .animate-pulse,
+  .animate-spin,
+  .animate-bounce,
+  .animate-float-gentle,
+  .animate-gradient-x,
+  .animate-gradient-y {
+    animation: none !important;
+  }
+}
+
+/* Focus management for accessibility */
+@media (prefers-reduced-motion: no-preference) {
+  .focus-visible {
+    transition: all 0.2s ease;
+  }
+
+  .focus-visible:focus-visible {
+    outline: 2px solid var(--accent-neon-blue);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px rgba(0, 212, 255, 0.2);
+  }
+}
+
+/* Print styles */
+@media print {
+  /* Hide unnecessary elements when printing */
+  .nav-glass,
+  .glass-button,
+  .btn-premium,
+  .btn-neon {
+    display: none !important;
+  }
+
+  /* Optimize for print */
+  .premium-card,
+  .stat-card-premium {
+    box-shadow: none !important;
+    border: 1px solid #ccc;
+    background: white !important;
+    color: black !important;
+  }
+
+  /* Remove animations for print */
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+/* Container queries for modern browsers */
+@container (max-width: 400px) {
+  .container-query-small {
+    padding: 12px;
+    font-size: 14px;
+  }
+}
+
+@container (min-width: 768px) {
+  .container-query-large {
+    padding: 24px;
+    font-size: 16px;
+  }
+}
+
+/* Utility classes for responsive behavior */
+.responsive-text {
+  font-size: clamp(1rem, 2.5vw, 1.5rem);
+}
+
+.responsive-spacing {
+  padding: clamp(1rem, 4vw, 2rem);
+  margin: clamp(0.5rem, 2vw, 1rem);
+}
+
+.responsive-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: clamp(1rem, 3vw, 2rem);
+}
+
+/* Glass morphism responsive adjustments */
+.glass-responsive {
+  backdrop-filter: blur(clamp(8px, 2vw, 20px));
+  background: rgba(15, 23, 42, clamp(0.6, 0.8, 0.9));
+}
+
+/* Neon effects responsive scaling */
+.neon-responsive {
+  box-shadow: 
+    0 0 clamp(5px, 1vw, 10px) currentColor,
+    0 0 clamp(10px, 2vw, 20px) currentColor,
+    0 0 clamp(15px, 3vw, 30px) currentColor;
+}
+
+/* Premium card responsive enhancement */
+.card-responsive {
+  padding: clamp(1rem, 4vw, 2rem);
+  border-radius: clamp(0.75rem, 2vw, 1.5rem);
+  margin: clamp(0.5rem, 2vw, 1rem);
+}
+
+/* Animation performance optimization */
+.gpu-accelerated {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Smooth scrolling enhancement */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* Custom scrollbar for all screen sizes */
+::-webkit-scrollbar {
+  width: clamp(4px, 1vw, 8px);
+  height: clamp(4px, 1vw, 8px);
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, var(--accent-neon-blue), var(--accent-neon-purple));
+  border-radius: clamp(2px, 0.5vw, 4px);
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: clamp(2px, 0.5vw, 4px);
+}

@@ -1,0 +1,8 @@
+# Redirect all API calls to backend
+/api/* https://acadmate-backend-2025.onrender.com/api/:splat 200
+
+# Redirect health checks
+/health https://acadmate-backend-2025.onrender.com/health 200
+
+# SPA fallback - all routes go to index.html
+/* /index.html 200
