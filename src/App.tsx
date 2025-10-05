@@ -6,6 +6,7 @@ import { useAuth } from './context/AuthContext';
 import { Toaster } from 'react-hot-toast';
 import ErrorBoundary from './components/ErrorBoundary';
 import './styles/globals.css';
+import CoachingHomepage from './components/CoachingHomepage';
 import PremiumHomepage from './components/PremiumHomepage';
 import EnhancedLoginForm from './components/EnhancedLoginForm';
 const StudentDashboard = React.lazy(() => import('./components/dashboard/StudentDashboard'));
@@ -63,7 +64,8 @@ function AppContent() {
     <div className="min-h-screen bg-black text-white overflow-hidden">
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
-          <Route path="/" element={<PremiumHomepage />} />
+          <Route path="/" element={<CoachingHomepage />} />
+          <Route path="/premium" element={<PremiumHomepage />} />
           <Route path="/login" element={<EnhancedLoginForm />} />
           <Route 
             path="/dashboard" 

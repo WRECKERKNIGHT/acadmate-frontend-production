@@ -263,7 +263,7 @@ const EnhancedLoginForm: React.FC = () => {
         email: formData.uid.trim() + '@demo.com',
         password: formData.password
       };
-      const response = await fetch('https://acadmate-backend.onrender.com/api/auth/login', {
+  const response = await fetch('https://acadmate-backend-2025.onrender.com/api/auth/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
