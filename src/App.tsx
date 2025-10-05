@@ -19,7 +19,14 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
   
   if (loading) {
-    return <LoadingScreen />;
+    return (
+      <div className="min-h-screen bg-black text-white flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-cyan-400 text-lg">Loading...</p>
+        </div>
+      </div>
+    );
   }
   
   if (!user) {
@@ -56,47 +63,14 @@ function AppContent() {
     <div className="min-h-screen bg-black text-white overflow-hidden">
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
-          {/* Always use premium homepage */}
           <Route path="/" element={<PremiumHomepage />} />
-          {/* Always use enhanced login */}
           <Route path="/login" element={<EnhancedLoginForm />} />
-          {/* Protected dashboard routes */}
           <Route 
             path="/dashboard" 
             element={
               <ProtectedRoute>
                 <Suspense fallback={<div />}>
                   <DashboardRouter />
-                </Suspense>
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/attendance" 
-            element={
-              <ProtectedRoute>
-                <Suspense fallback={<div />}>
-                  <AttendanceSystem />
-                </Suspense>
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/leaderboard" 
-            element={
-              <ProtectedRoute>
-                <Suspense fallback={<div />}>
-                  <EnhancedLeaderboard />
-                </Suspense>
-              </ProtectedRoute>
-            } 
-          />
-          <Route 
-            path="/tests" 
-            element={
-              <ProtectedRoute>
-                <Suspense fallback={<div />}>
-                  <EnhancedOfflineTestManager />
                 </Suspense>
               </ProtectedRoute>
             } 
