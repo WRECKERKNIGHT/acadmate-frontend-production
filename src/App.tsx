@@ -1,26 +1,13 @@
+
 import React, { Suspense } from 'react';
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AnimatePresence } from 'framer-motion';
 import { useAuth } from './context/AuthContext';
 import { Toaster } from 'react-hot-toast';
 import ErrorBoundary from './components/ErrorBoundary';
-
-// Import global premium black theme
 import './styles/globals.css';
-
-// Simple loading component
-const LoadingScreen = () => (
-  <div className="min-h-screen bg-black text-white flex items-center justify-center">
-    <div className="text-center">
-      <div className="w-16 h-16 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-      <p className="text-cyan-400 text-lg">Loading...</p>
-    </div>
-  </div>
-);
-
-// Lazy load components for better performance
-const PremiumHomepage = React.lazy(() => import('./components/PremiumHomepage'));
-const EnhancedLoginForm = React.lazy(() => import('./components/EnhancedLoginForm'));
+import PremiumHomepage from './components/PremiumHomepage';
+import EnhancedLoginForm from './components/EnhancedLoginForm';
 const StudentDashboard = React.lazy(() => import('./components/dashboard/StudentDashboard'));
 const TeacherDashboard = React.lazy(() => import('./components/dashboard/TeacherDashboard'));
 const AdminDashboard = React.lazy(() => import('./components/dashboard/AdminDashboard'));
@@ -65,73 +52,50 @@ function DashboardRouter() {
 
 function AppContent() {
   const location = useLocation();
-  
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden">
       <AnimatePresence mode="wait" initial={false}>
         <Routes location={location} key={location.pathname}>
-          {/* Homepage with premium coaching design */}
-          <Route 
-            path="/" 
-            element={
-              <Suspense fallback={<LoadingScreen />}>
-                <PremiumHomepage />
-              </Suspense>
-            } 
-          />
-          
-          {/* Enhanced login with no errors */}
-          <Route 
-            path="/login" 
-            element={
-              <Suspense fallback={<LoadingScreen />}>
-                <EnhancedLoginForm />
-              </Suspense>
-            } 
-          />
-          
+          {/* Always use premium homepage */}
+          <Route path="/" element={<PremiumHomepage />} />
+          {/* Always use enhanced login */}
+          <Route path="/login" element={<EnhancedLoginForm />} />
           {/* Protected dashboard routes */}
           <Route 
             path="/dashboard" 
             element={
               <ProtectedRoute>
-                <Suspense fallback={<LoadingScreen />}>
+                <Suspense fallback={<div />}>
                   <DashboardRouter />
                 </Suspense>
               </ProtectedRoute>
             } 
           />
-          
-          {/* Attendance system */}
           <Route 
             path="/attendance" 
             element={
               <ProtectedRoute>
-                <Suspense fallback={<LoadingScreen />}>
+                <Suspense fallback={<div />}>
                   <AttendanceSystem />
                 </Suspense>
               </ProtectedRoute>
             } 
           />
-          
-          {/* Leaderboard */}
           <Route 
             path="/leaderboard" 
             element={
               <ProtectedRoute>
-                <Suspense fallback={<LoadingScreen />}>
+                <Suspense fallback={<div />}>
                   <EnhancedLeaderboard />
                 </Suspense>
               </ProtectedRoute>
             } 
           />
-          
-          {/* Offline Tests */}
           <Route 
             path="/tests" 
             element={
               <ProtectedRoute>
-                <Suspense fallback={<LoadingScreen />}>
+                <Suspense fallback={<div />}>
                   <EnhancedOfflineTestManager />
                 </Suspense>
               </ProtectedRoute>
