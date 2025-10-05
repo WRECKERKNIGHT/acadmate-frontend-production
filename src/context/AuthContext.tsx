@@ -3,6 +3,18 @@ import { toast } from 'react-hot-toast';
 import axios from 'axios';
 
 // API Configuration
+
+
+// Fix for Vite env typing (declare globally)
+declare global {
+  interface ImportMetaEnv {
+    readonly VITE_API_BASE_URL?: string;
+  }
+  interface ImportMeta {
+    readonly env: ImportMetaEnv;
+  }
+}
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:5000';
 
 const apiClient = axios.create({
@@ -39,7 +51,7 @@ interface User {
 interface AuthContextType {
   user: User | null;
   loading: boolean;
-  login: (email: string, password: string) => Promise<User>;
+  login: (uid: string, password: string) => Promise<User>;
   logout: () => void;
   signup?: (userData: any) => Promise<User>;
 }
@@ -93,37 +105,34 @@ export function AuthProvider({ children }: AuthProviderProps) {
     initializeAuth();
   }, []);
 
-  const login = async (email: string, password: string): Promise<User> => {
+  const login = async (uid: string, password: string): Promise<User> => {
     try {
-      // First try the main backend
-      const response = await apiClient.post('/auth/login', { email, password });
+      // Try backend with UID
+      const response = await apiClient.post('/auth/login', { uid, password });
       const { user: userData, token } = response.data;
-      
       localStorage.setItem('authToken', token);
       localStorage.setItem('userData', JSON.stringify(userData));
       setUser(userData);
-      
       return userData;
     } catch (error: any) {
       console.error('Backend login failed, trying demo mode:', error);
-      
       // Demo mode fallback for development/testing
       const demoUsers: { [key: string]: User } = {
-        'student@acadmate.com': {
+        'STH000': {
           id: 'demo-student-1',
           email: 'student@acadmate.com',
           name: 'Demo Student',
           fullName: 'Demo Student User',
           role: 'student'
         },
-        'teacher@acadmate.com': {
+        'TRE000': {
           id: 'demo-teacher-1',
           email: 'teacher@acadmate.com',
           name: 'Demo Teacher',
           fullName: 'Demo Teacher User',
           role: 'teacher'
         },
-        'admin@acadmate.com': {
+        'HTR000': {
           id: 'demo-admin-1',
           email: 'admin@acadmate.com',
           name: 'Demo Admin',
@@ -131,25 +140,18 @@ export function AuthProvider({ children }: AuthProviderProps) {
           role: 'admin'
         }
       };
-      
-      const demoUser = demoUsers[email.toLowerCase()];
-      
-      if (demoUser && password.includes('123')) {
-        // Simulate API delay
+      const demoUser = demoUsers[uid.toUpperCase()];
+      if (demoUser && password.includes('demo123')) {
         await new Promise(resolve => setTimeout(resolve, 1000));
-        
         const demoToken = `demo-token-${demoUser.role}-${Date.now()}`;
         localStorage.setItem('authToken', demoToken);
         localStorage.setItem('userData', JSON.stringify(demoUser));
         setUser(demoUser);
-        
         return demoUser;
       }
-      
-      // If neither backend nor demo works, throw error
       const message = error.response?.data?.message || 
                      error.response?.data?.error || 
-                     'Invalid email or password';
+                     'Invalid UID or password';
       throw new Error(message);
     }
   };

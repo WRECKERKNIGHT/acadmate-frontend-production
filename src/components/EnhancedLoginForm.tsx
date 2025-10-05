@@ -186,7 +186,7 @@ const EnhancedLoginForm: React.FC = () => {
   
   // Form state
   const [formData, setFormData] = useState({
-    email: '',
+    uid: '',
     password: ''
   });
   
@@ -200,19 +200,16 @@ const EnhancedLoginForm: React.FC = () => {
   useEffect(() => {
     if (formTouched && !isLoading) {
       const newErrors: {[key: string]: string} = {};
-      
-      if (!formData.email.trim()) {
-        newErrors.email = 'Email is required';
-      } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-        newErrors.email = 'Please enter a valid email';
+      if (!formData.uid.trim()) {
+        newErrors.uid = 'UID is required';
+      } else if (!/^([A-Z]{3}\d{3})$/i.test(formData.uid.trim())) {
+        newErrors.uid = 'UID must be like STH123, TRE456, etc.';
       }
-      
       if (!formData.password.trim()) {
         newErrors.password = 'Password is required';
       } else if (formData.password.length < 6) {
         newErrors.password = 'Password must be at least 6 characters';
       }
-      
       setErrors(newErrors);
     }
   }, [formData, formTouched, isLoading]);
@@ -221,10 +218,8 @@ const EnhancedLoginForm: React.FC = () => {
     setFormTouched(true);
     setFormData(prev => ({
       ...prev,
-      [field]: e.target.value
+      [field]: field === 'uid' ? e.target.value.toUpperCase() : e.target.value
     }));
-    
-    // Clear errors immediately when user types
     if (errors[field]) {
       setErrors(prev => {
         const newErrors = { ...prev };
@@ -237,35 +232,25 @@ const EnhancedLoginForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setFormTouched(true);
-    
-    // Clear all previous errors
     setErrors({});
-    
-    // Validate form
     const newErrors: {[key: string]: string} = {};
-    
-    if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
+    if (!formData.uid.trim()) {
+      newErrors.uid = 'UID is required';
+    } else if (!/^([A-Z]{3}\d{3})$/i.test(formData.uid.trim())) {
+      newErrors.uid = 'UID must be like STH123, TRE456, etc.';
     }
-    
     if (!formData.password.trim()) {
       newErrors.password = 'Password is required';
     } else if (formData.password.length < 6) {
       newErrors.password = 'Password must be at least 6 characters';
     }
-    
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       toast.error('Please fix the errors below');
       return;
     }
-    
     setIsLoading(true);
-    
     try {
-      // Show loading toast
       const loadingToast = toast.loading('🔐 Authenticating...', {
         style: {
           background: '#0a0a0a',
@@ -273,11 +258,7 @@ const EnhancedLoginForm: React.FC = () => {
           border: '1px solid #00ffff',
         }
       });
-      
-      // Attempt login
-      const result = await login(formData.email, formData.password);
-      
-      // Success
+      const result = await login(formData.uid, formData.password);
       toast.dismiss(loadingToast);
       toast.success('🎉 Welcome to ACADMATE!', {
         duration: 3000,
@@ -288,26 +269,19 @@ const EnhancedLoginForm: React.FC = () => {
           boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)'
         }
       });
-      
-      // Navigate to dashboard after a short delay
       setTimeout(() => {
         navigate('/dashboard');
       }, 1000);
-      
     } catch (error: any) {
       console.error('Login error:', error);
-      
-      // Handle specific error types
       let errorMessage = '❌ Login failed. Please try again.';
-      
       if (error?.response?.status === 401) {
-        errorMessage = '❌ Invalid email or password';
+        errorMessage = '❌ Invalid UID or password';
       } else if (error?.response?.status === 404) {
         errorMessage = '❌ Account not found';
       } else if (error?.message) {
         errorMessage = `❌ ${error.message}`;
       }
-      
       toast.error(errorMessage, {
         duration: 4000,
         style: {
@@ -316,7 +290,6 @@ const EnhancedLoginForm: React.FC = () => {
           border: '1px solid #ff4444',
         }
       });
-      
     } finally {
       setIsLoading(false);
     }
@@ -324,20 +297,16 @@ const EnhancedLoginForm: React.FC = () => {
 
   // Demo login function with better error handling
   const handleDemoLogin = async (role: 'student' | 'teacher' | 'admin') => {
-    if (isLoading) return; // Prevent multiple clicks
-    
+    if (isLoading) return;
     setIsLoading(true);
-    setErrors({}); // Clear any existing errors
-    
+    setErrors({});
     const demoCredentials = {
-      student: { email: 'student@acadmate.com', password: 'student123' },
-      teacher: { email: 'teacher@acadmate.com', password: 'teacher123' },
-      admin: { email: 'admin@acadmate.com', password: 'admin123' }
+      student: { uid: 'STH000', password: 'demo123' },
+      teacher: { uid: 'TRE000', password: 'demo123' },
+      admin: { uid: 'HTR000', password: 'demo123' }
     };
-    
     const creds = demoCredentials[role];
     setFormData(creds);
-    
     try {
       const loadingToast = toast.loading(`🚀 Logging in as ${role}...`, {
         style: {
@@ -346,9 +315,7 @@ const EnhancedLoginForm: React.FC = () => {
           border: '1px solid #00ffff',
         }
       });
-      
-      await login(creds.email, creds.password);
-      
+      await login(creds.uid, creds.password);
       toast.dismiss(loadingToast);
       toast.success(`🎯 Welcome ${role.toUpperCase()}!`, {
         duration: 3000,
@@ -359,11 +326,9 @@ const EnhancedLoginForm: React.FC = () => {
           boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)'
         }
       });
-      
       setTimeout(() => {
         navigate('/dashboard');
       }, 1000);
-      
     } catch (error: any) {
       console.error('Demo login error:', error);
       toast.error('❌ Demo login failed. Using fallback authentication...', {
@@ -374,13 +339,10 @@ const EnhancedLoginForm: React.FC = () => {
           border: '1px solid #ff4444',
         }
       });
-      
-      // Fallback: simulate successful login for demo
       setTimeout(() => {
         toast.success(`🎯 Demo ${role.toUpperCase()} access granted!`);
         navigate('/dashboard');
       }, 1500);
-      
     } finally {
       setIsLoading(false);
     }
@@ -454,14 +416,15 @@ const EnhancedLoginForm: React.FC = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5, duration: 0.6 }}
           >
+
             <GlowingInput
-              label="Email Address"
-              type="email"
-              value={formData.email}
-              onChange={handleInputChange('email')}
-              placeholder="Enter your email"
-              icon="📧"
-              error={errors.email}
+              label="UID"
+              type="text"
+              value={formData.uid}
+              onChange={handleInputChange('uid')}
+              placeholder="Enter your UID (e.g., STH123, TRE456)"
+              icon="🆔"
+              error={errors.uid}
             />
 
             <div className="relative">

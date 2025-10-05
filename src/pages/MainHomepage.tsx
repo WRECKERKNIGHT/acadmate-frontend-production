@@ -96,66 +96,19 @@ const MainHomepage: React.FC = () => {
   return (
     <div className="min-h-screen bg-black overflow-hidden relative">
       {/* Animated Background with CGI Effects */}
-      <div className="fixed inset-0 z-0">
-        {/* Liquid Morph Background */}
-        <LiquidMorphBackground />
-        
-        {/* Matrix Rain Effect */}
-        <MatrixRain className="opacity-5" />
-        
-        {/* Floating Geometry */}
-        <FloatingGeometry />
-        
-        {/* Neural Network */}
-        <div className="absolute top-0 right-0 w-1/3 h-1/3 opacity-20">
-          <NeuralNetwork />
-        </div>
-        
-        {/* Advanced Particle System */}
-        <ParticleWave className="absolute inset-0 opacity-40" />
-        
-        {/* Original Particle System */}
-        <div className="absolute inset-0 opacity-30">
-          <ParticleSystem />
-        </div>
-        
-        {/* Gradient Orbs with Mouse Interaction */}
-        <motion.div
-          className="absolute w-96 h-96 rounded-full opacity-20 blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, #3B82F6 0%, #1D4ED8 50%, transparent 70%)',
-            x: useTransform(mouseX, [-0.5, 0.5], [-100, 100]),
-            y: useTransform(mouseY, [-0.5, 0.5], [-100, 100]),
-          }}
-          animate={{
-            scale: [1, 1.2, 1],
-            rotate: [0, 180, 360],
-          }}
-          transition={{
-            duration: 20,
-            repeat: Infinity,
-            ease: "linear"
-          }}
-        />
-        
-        <motion.div
-          className="absolute top-1/2 right-0 w-80 h-80 rounded-full opacity-15 blur-3xl"
-          style={{
-            background: 'radial-gradient(circle, #8B5CF6 0%, #7C3AED 50%, transparent 70%)',
-            x: useTransform(mouseX, [-0.5, 0.5], [50, -50]),
-            y: useTransform(mouseY, [-0.5, 0.5], [50, -50]),
-          }}
-          animate={{
-            scale: [1.2, 1, 1.2],
-            rotate: [360, 180, 0],
-          }}
-          transition={{
-            duration: 15,
-            repeat: Infinity,
-            ease: "linear"
-          }}
+      {/* Spline 3D Neon Bubble Scene */}
+      <div className="fixed inset-0 z-0 pointer-events-none">
+        <iframe
+          src="/3d/spline-bubbles.html"
+          style={{ width: '100vw', height: '100vh', border: 'none', background: 'transparent' }}
+          width="100%"
+          height="100%"
+          frameBorder="0"
+          title="3D Neon Bubble Scene"
+          allowFullScreen
         />
       </div>
+      {/* ...existing code for other effects can be re-enabled or layered as needed ... */}
 
       {/* Floating Navigation */}
       <motion.nav
@@ -422,22 +375,21 @@ const MainHomepage: React.FC = () => {
           className="h-screen" 
           foregroundFrames={80} 
           backgroundFrames={40}
+        />
+        <motion.div
+          className="text-center text-white z-30 -mt-[80vh] mb-20"
+          initial={{ opacity: 0, scale: 0.8 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1 }}
         >
-          <motion.div
-            className="text-center text-white z-30"
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1 }}
-          >
-            <h2 className="text-6xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-purple-300 bg-clip-text text-transparent">
-              Innovation in Motion
-            </h2>
-            <p className="text-xl text-slate-300 max-w-2xl mx-auto">
-              Experience learning like never before with our cutting-edge technology and immersive educational platform.
-            </p>
-          </motion.div>
-        </CinematicVideoScroll>
+          <h2 className="text-6xl font-bold mb-6 bg-gradient-to-r from-white via-blue-200 to-purple-300 bg-clip-text text-transparent">
+            Innovation in Motion
+          </h2>
+          <p className="text-xl text-slate-300 max-w-2xl mx-auto">
+            Experience learning like never before with our cutting-edge technology and immersive educational platform.
+          </p>
+        </motion.div>
 
         {/* Layered Video Scroll Effects */}
         <LayeredVideoScroll 
@@ -447,54 +399,53 @@ const MainHomepage: React.FC = () => {
             { frameCount: 45, speed: 0.7, opacity: 0.6, blendMode: 'screen' },
             { frameCount: 90, speed: 1.3, opacity: 0.4, blendMode: 'overlay' }
           ]}
+        />
+        <motion.div
+          className="absolute inset-0 flex items-center justify-center z-30 -mt-[80vh] mb-20"
+          initial={{ opacity: 0, y: 50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 1, delay: 0.5 }}
         >
-          <motion.div
-            className="absolute inset-0 flex items-center justify-center z-30"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.5 }}
-          >
-            <div className="text-center text-white">
-              <motion.h3
-                className="text-5xl font-bold mb-8"
-                animate={{ 
-                  backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
-                }}
-                transition={{ duration: 3, repeat: Infinity }}
-                style={{
-                  background: 'linear-gradient(90deg, #3B82F6, #8B5CF6, #EC4899, #3B82F6)',
-                  backgroundSize: '300% 100%',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent'
-                }}
-              >
-                Multi-Dimensional Learning
-              </motion.h3>
-              <div className="grid grid-cols-3 gap-8 max-w-4xl mx-auto">
-                {[
-                  { icon: Globe, title: "Global Reach", desc: "Students worldwide" },
-                  { icon: Shield, title: "Secure Platform", desc: "Protected learning" },
-                  { icon: Clock, title: "24/7 Access", desc: "Learn anytime" }
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-2xl p-6"
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: index * 0.2 }}
-                    whileHover={{ scale: 1.05, y: -5 }}
-                  >
-                    <item.icon className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-                    <h4 className="text-xl font-bold mb-2">{item.title}</h4>
-                    <p className="text-slate-300">{item.desc}</p>
-                  </motion.div>
-                ))}
-              </div>
+          <div className="text-center text-white">
+            <motion.h3
+              className="text-5xl font-bold mb-8"
+              animate={{ 
+                backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'],
+              }}
+              transition={{ duration: 3, repeat: Infinity }}
+              style={{
+                background: 'linear-gradient(90deg, #3B82F6, #8B5CF6, #EC4899, #3B82F6)',
+                backgroundSize: '300% 100%',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}
+            >
+              Multi-Dimensional Learning
+            </motion.h3>
+            <div className="grid grid-cols-3 gap-8 max-w-4xl mx-auto">
+              {[
+                { icon: Globe, title: "Global Reach", desc: "Students worldwide" },
+                { icon: Shield, title: "Secure Platform", desc: "Protected learning" },
+                { icon: Clock, title: "24/7 Access", desc: "Learn anytime" }
+              ].map((item, index) => (
+                <motion.div
+                  key={index}
+                  className="bg-black/30 backdrop-blur-sm border border-white/10 rounded-2xl p-6"
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.2 }}
+                  whileHover={{ scale: 1.05, y: -5 }}
+                >
+                  <item.icon className="w-12 h-12 text-blue-400 mx-auto mb-4" />
+                  <h4 className="text-xl font-bold mb-2">{item.title}</h4>
+                  <p className="text-slate-300">{item.desc}</p>
+                </motion.div>
+              ))}
             </div>
-          </motion.div>
-        </LayeredVideoScroll>
+          </div>
+        </motion.div>
 
         {/* Single Video Scroll with Custom Content */}
         <VideoScrollEffect className="h-screen" frameCount={120}>
