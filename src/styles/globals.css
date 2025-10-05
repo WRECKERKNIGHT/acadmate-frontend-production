@@ -191,39 +191,6 @@ body {
 }
 
 /* Card utility classes */
-.card-glow {
-  background: var(--color-bg-card);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 255, 255, 0.3);
-  border-radius: 1rem;
-  box-shadow: var(--shadow-card-glow);
-  transition: all var(--duration-normal) var(--ease-in-out);
-}
-
-.card-glow:hover {
-  border-color: rgba(0, 255, 255, 0.5);
-  box-shadow: var(--shadow-strong-glow);
-  transform: translateY(-4px);
-}
-
-.card-premium {
-  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 255, 255, 0.1) 100%);
-  backdrop-filter: blur(20px);
-  border: 1px solid rgba(0, 255, 255, 0.3);
-  border-radius: 1.5rem;
-  box-shadow: var(--shadow-card-glow);
-  transition: all var(--duration-normal) var(--ease-in-out);
-}
-
-.card-premium:hover {
-  border-color: rgba(255, 0, 255, 0.5);
-  box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
-  transform: scale(1.02);
-}
-
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 8px;
   height: 8px;
 }
 
