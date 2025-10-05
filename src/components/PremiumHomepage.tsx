@@ -380,30 +380,40 @@ const PremiumHomepage: React.FC = () => {
         }}
       />
       
-      {/* Hero Section */}
+      {/* Hero Section with 3D Spline and more VFX */}
       <motion.section 
         className="relative min-h-screen flex items-center justify-center px-4"
         style={{ y: y1, opacity, scale }}
       >
+        {/* 3D Spline or SVG CGI Hero */}
+        <div className="absolute top-0 left-0 w-full h-full z-10 pointer-events-none">
+          <iframe
+            src="https://prod.spline.design/6Q2QwQv7nQw6QwQw/scene.splinecode"
+            title="3D CGI Hero"
+            frameBorder="0"
+            width="100%"
+            height="100%"
+            style={{ minHeight: 600, opacity: 0.7, filter: 'drop-shadow(0 0 80px #00fff7) blur(1px)' }}
+            allowFullScreen
+          />
+        </div>
         <MorphingSphere />
-        
         <div className="relative z-20 text-center max-w-6xl mx-auto">
           <motion.div
             initial={{ opacity: 0, scale: 0.5, rotateY: 180 }}
             animate={{ opacity: 1, scale: 1, rotateY: 0 }}
             transition={{ duration: 1.5, type: "spring", stiffness: 80 }}
           >
-            <GlitchText className="text-7xl md:text-9xl font-black mb-8 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+            <GlitchText className="text-8xl md:text-9xl font-black mb-8 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent drop-shadow-[0_0_40px_#00fff7]">
               ACADMATE
             </GlitchText>
-            
             <motion.h2
-              className="text-3xl md:text-5xl font-bold mb-6 text-cyan-300"
+              className="text-4xl md:text-6xl font-bold mb-6 text-cyan-300 drop-shadow-[0_0_40px_#00fff7]"
               animate={{
                 textShadow: [
-                  "0 0 20px #00ffff",
-                  "0 0 40px #ff00ff",
-                  "0 0 20px #00ffff"
+                  "0 0 40px #00ffff",
+                  "0 0 80px #ff00ff",
+                  "0 0 40px #00ffff"
                 ]
               }}
               transition={{ duration: 3, repeat: Infinity }}
@@ -411,18 +421,16 @@ const PremiumHomepage: React.FC = () => {
               🏆 PREMIUM COACHING INSTITUTE
             </motion.h2>
           </motion.div>
-          
           <motion.p
-            className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed max-w-4xl mx-auto"
+            className="text-2xl md:text-3xl text-cyan-200 mb-12 leading-relaxed max-w-4xl mx-auto drop-shadow-[0_0_20px_#00fff7]"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.8, duration: 0.8 }}
           >
-            🎯 Master JEE • NEET • Boards with Revolutionary AI-Powered Learning
+            🎯 Master JEE • NEET • Boards with <span className="text-pink-400 font-bold">Revolutionary AI-Powered Learning</span>
             <br />
-            ⚡ Live Classes • Expert Faculty • 24/7 Doubt Solving • Performance Analytics
+            ⚡ <span className="text-purple-400 font-bold">Live Classes</span> • <span className="text-cyan-400 font-bold">Expert Faculty</span> • <span className="text-yellow-300 font-bold">24/7 Doubt Solving</span> • <span className="text-green-400 font-bold">Performance Analytics</span>
           </motion.p>
-          
           {/* CTA Buttons */}
           <motion.div
             className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12"
@@ -432,13 +440,13 @@ const PremiumHomepage: React.FC = () => {
           >
             <motion.button
               onClick={() => navigate('/login')}
-              className="group relative px-10 py-5 bg-gradient-to-r from-cyan-500 to-blue-600 rounded-full font-bold text-xl overflow-hidden transition-all duration-300"
+              className="group relative px-12 py-6 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 rounded-full font-bold text-2xl overflow-hidden transition-all duration-300 shadow-[0_0_40px_#00fff7]"
               whileHover={{ 
-                scale: 1.1, 
+                scale: 1.12, 
                 rotateX: 10,
-                boxShadow: "0 20px 40px rgba(0, 255, 255, 0.4)"
+                boxShadow: "0 20px 60px #00fff7"
               }}
-              whileTap={{ scale: 0.9 }}
+              whileTap={{ scale: 0.95 }}
             >
               <span className="relative z-10 flex items-center gap-2">
                 🚀 Enter Platform
@@ -446,25 +454,23 @@ const PremiumHomepage: React.FC = () => {
               <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="absolute inset-0 animate-pulse bg-white/10"></div>
             </motion.button>
-            
             <motion.button
-              className="group relative px-10 py-5 border-2 border-cyan-400 text-cyan-400 rounded-full font-bold text-xl overflow-hidden transition-all duration-300 hover:bg-cyan-400 hover:text-black"
+              className="group relative px-12 py-6 border-2 border-cyan-400 text-cyan-400 rounded-full font-bold text-2xl overflow-hidden transition-all duration-300 hover:bg-cyan-400 hover:text-black shadow-[0_0_40px_#00fff7]"
               whileHover={{ 
-                scale: 1.1, 
+                scale: 1.12, 
                 rotateX: -10,
-                boxShadow: "0 20px 40px rgba(0, 255, 255, 0.3)"
+                boxShadow: "0 20px 60px #00fff7"
               }}
-              whileTap={{ scale: 0.9 }}
+              whileTap={{ scale: 0.95 }}
             >
               <span className="relative z-10 flex items-center gap-2">
                 📚 Explore Courses
               </span>
             </motion.button>
           </motion.div>
-          
           {/* Achievement Stats */}
           <motion.div
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto"
+            className="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 1.5, duration: 0.8 }}
@@ -477,13 +483,13 @@ const PremiumHomepage: React.FC = () => {
             ].map((stat, i) => (
               <motion.div
                 key={i}
-                className="text-center p-4 rounded-xl bg-black/50 backdrop-blur-sm border border-cyan-500/30 hover:border-cyan-400/60 transition-colors duration-300"
-                whileHover={{ scale: 1.05, y: -5 }}
+                className="text-center p-6 rounded-2xl bg-black/60 backdrop-blur-2xl border border-cyan-500/40 hover:border-cyan-400/80 transition-colors duration-300 shadow-[0_0_40px_#00fff7]"
+                whileHover={{ scale: 1.08, y: -8 }}
                 animate={{
                   boxShadow: [
-                    "0 0 20px rgba(0, 255, 255, 0.2)",
-                    "0 0 30px rgba(255, 0, 255, 0.2)",
-                    "0 0 20px rgba(0, 255, 255, 0.2)"
+                    "0 0 40px #00fff7",
+                    "0 0 60px #ff00ff",
+                    "0 0 40px #00fff7"
                   ]
                 }}
                 transition={{ 
@@ -491,14 +497,14 @@ const PremiumHomepage: React.FC = () => {
                   hover: { duration: 0.2 }
                 }}
               >
-                <div className="text-2xl mb-2">{stat.icon}</div>
-                <div className="text-2xl font-bold text-cyan-400 mb-1">{stat.number}</div>
-                <div className="text-sm text-gray-400">{stat.label}</div>
+                <div className="text-3xl mb-2">{stat.icon}</div>
+                <div className="text-3xl font-bold text-cyan-300 mb-1">{stat.number}</div>
+                <div className="text-lg text-cyan-100">{stat.label}</div>
               </motion.div>
             ))}
           </motion.div>
         </div>
-        
+      </motion.section>
         {/* Scroll Indicator */}
         <motion.div
           className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
