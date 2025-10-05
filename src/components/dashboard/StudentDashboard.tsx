@@ -48,6 +48,7 @@ interface Achievement {
 
 const StudentDashboard: React.FC = () => {
   const { user } = useAuth();
+
   const [currentTime, setCurrentTime] = useState(new Date());
 
   // Premium animated background effect
@@ -162,6 +163,10 @@ const StudentDashboard: React.FC = () => {
 // Main return block for StudentDashboard
   return (
   <div className="min-h-screen bg-black text-white relative overflow-hidden">
+    {/* DEBUG: Always visible banner for troubleshooting */}
+    <div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', zIndex: 9999, background: '#ff00cc', color: '#fff', textAlign: 'center', fontWeight: 'bold', padding: '8px 0', letterSpacing: '2px' }}>
+      StudentDashboard Rendered - If you see this, the dashboard component is mounted.
+    </div>
       {/* 3D/CGI Spline Hero */}
       <div className="absolute top-0 left-1/2 transform -translate-x-1/2 mt-2 z-10 w-full max-w-3xl pointer-events-none">
         <iframe
