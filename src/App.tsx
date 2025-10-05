@@ -4,23 +4,35 @@ import { AnimatePresence } from 'framer-motion';
 import { useAuth } from './context/AuthContext';
 import { Toaster } from 'react-hot-toast';
 import ErrorBoundary from './components/ErrorBoundary';
-import LoadingStates from './components/LoadingStates';
+
+// Import global premium black theme
+import './styles/globals.css';
+
+// Simple loading component
+const LoadingScreen = () => (
+  <div className="min-h-screen bg-black text-white flex items-center justify-center">
+    <div className="text-center">
+      <div className="w-16 h-16 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+      <p className="text-cyan-400 text-lg">Loading...</p>
+    </div>
+  </div>
+);
 
 // Lazy load components for better performance
 const PremiumHomepage = React.lazy(() => import('./components/PremiumHomepage'));
 const EnhancedLoginForm = React.lazy(() => import('./components/EnhancedLoginForm'));
-const StudentDashboard = React.lazy(() => import('./components/StudentDashboard'));
-const TeacherDashboard = React.lazy(() => import('./components/TeacherDashboard'));
-const HeadTeacherDashboard = React.lazy(() => import('./components/HeadTeacherDashboard'));
-const AttendancePage = React.lazy(() => import('./pages/Attendance'));
-const Leaderboard = React.lazy(() => import('./components/leaderboard/Leaderboard'));
-const OfflineTestManager = React.lazy(() => import('./components/tests/OfflineTestManager'));
+const StudentDashboard = React.lazy(() => import('./components/dashboard/StudentDashboard'));
+const TeacherDashboard = React.lazy(() => import('./components/dashboard/TeacherDashboard'));
+const AdminDashboard = React.lazy(() => import('./components/dashboard/AdminDashboard'));
+const AttendanceSystem = React.lazy(() => import('./components/attendance/AttendanceSystem'));
+const EnhancedLeaderboard = React.lazy(() => import('./components/leaderboard/EnhancedLeaderboard'));
+const EnhancedOfflineTestManager = React.lazy(() => import('./components/tests/EnhancedOfflineTestManager'));
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, loading } = useAuth();
   
   if (loading) {
-    return <LoadingStates.FullScreen />;
+    return <LoadingScreen />;
   }
   
   if (!user) {
@@ -45,7 +57,7 @@ function DashboardRouter() {
     case 'HEAD_TEACHER':
     case 'head_teacher':
     case 'admin':
-      return <HeadTeacherDashboard />;
+      return <AdminDashboard />;
     default:
       return <Navigate to="/login" replace />;
   }
@@ -62,7 +74,7 @@ function AppContent() {
           <Route 
             path="/" 
             element={
-              <Suspense fallback={<LoadingStates.FullScreen />}>
+              <Suspense fallback={<LoadingScreen />}>
                 <PremiumHomepage />
               </Suspense>
             } 
@@ -72,7 +84,7 @@ function AppContent() {
           <Route 
             path="/login" 
             element={
-              <Suspense fallback={<LoadingStates.FullScreen />}>
+              <Suspense fallback={<LoadingScreen />}>
                 <EnhancedLoginForm />
               </Suspense>
             } 
@@ -83,7 +95,7 @@ function AppContent() {
             path="/dashboard" 
             element={
               <ProtectedRoute>
-                <Suspense fallback={<LoadingStates.FullScreen />}>
+                <Suspense fallback={<LoadingScreen />}>
                   <DashboardRouter />
                 </Suspense>
               </ProtectedRoute>
@@ -95,8 +107,8 @@ function AppContent() {
             path="/attendance" 
             element={
               <ProtectedRoute>
-                <Suspense fallback={<LoadingStates.FullScreen />}>
-                  <AttendancePage />
+                <Suspense fallback={<LoadingScreen />}>
+                  <AttendanceSystem />
                 </Suspense>
               </ProtectedRoute>
             } 
@@ -107,8 +119,8 @@ function AppContent() {
             path="/leaderboard" 
             element={
               <ProtectedRoute>
-                <Suspense fallback={<LoadingStates.FullScreen />}>
-                  <Leaderboard />
+                <Suspense fallback={<LoadingScreen />}>
+                  <EnhancedLeaderboard />
                 </Suspense>
               </ProtectedRoute>
             } 
@@ -119,8 +131,8 @@ function AppContent() {
             path="/tests" 
             element={
               <ProtectedRoute>
-                <Suspense fallback={<LoadingStates.FullScreen />}>
-                  <OfflineTestManager />
+                <Suspense fallback={<LoadingScreen />}>
+                  <EnhancedOfflineTestManager />
                 </Suspense>
               </ProtectedRoute>
             } 
