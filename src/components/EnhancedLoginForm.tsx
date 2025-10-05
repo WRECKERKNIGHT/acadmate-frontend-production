@@ -250,38 +250,76 @@ const EnhancedLoginForm: React.FC = () => {
       return;
     }
     setIsLoading(true);
+    const loadingToast = toast.loading('🔐 Authenticating...', {
+      style: {
+        background: '#0a0a0a',
+        color: '#00ffff',
+        border: '1px solid #00ffff',
+      }
+    });
     try {
-      const loadingToast = toast.loading('🔐 Authenticating...', {
-        style: {
-          background: '#0a0a0a',
-          color: '#00ffff',
-          border: '1px solid #00ffff',
-        }
+      // API expects email and password, so map UID to email for demo
+      const payload = {
+        email: formData.uid.trim() + '@demo.com',
+        password: formData.password
+      };
+      const response = await fetch('https://acadmate-backend.onrender.com/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
       });
-      const result = await login(formData.uid, formData.password);
-      toast.dismiss(loadingToast);
-      toast.success('🎉 Welcome to ACADMATE!', {
-        duration: 3000,
-        style: {
-          background: '#0a0a0a',
-          color: '#00ffff',
-          border: '1px solid #00ffff',
-          boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)'
-        }
-      });
-      setTimeout(() => {
-        navigate('/dashboard');
-      }, 1000);
+      if (!response.ok) {
+        if (response.status === 401) throw new Error('Invalid UID or password');
+        if (response.status === 404) throw new Error('Account not found');
+        throw new Error('Login failed. Please try again.');
+      }
+      const data = await response.json();
+      if (data.token) {
+        localStorage.setItem('token', data.token);
+        toast.dismiss(loadingToast);
+        toast.success('🎉 Welcome to ACADMATE!', {
+          duration: 3000,
+          style: {
+            background: '#0a0a0a',
+            color: '#00ffff',
+            border: '1px solid #00ffff',
+            boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)'
+          }
+        });
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 1000);
+        return;
+      } else {
+        throw new Error('No token received');
+      }
     } catch (error: any) {
-      console.error('Login error:', error);
+      // Allow demo access for STH000, TRE000, HTR000 with demo123
+      const demoUIDs = ['STH000', 'TRE000', 'HTR000'];
+      if (demoUIDs.includes(formData.uid.trim().toUpperCase()) && formData.password === 'demo123') {
+        localStorage.setItem('token', 'demo-demo-token');
+        toast.dismiss(loadingToast);
+        toast.success('🎯 Demo access granted!', {
+          duration: 3000,
+          style: {
+            background: '#0a0a0a',
+            color: '#00ffff',
+            border: '1px solid #00ffff',
+            boxShadow: '0 0 20px rgba(0, 255, 255, 0.3)'
+          }
+        });
+        setTimeout(() => {
+          navigate('/dashboard');
+        }, 1000);
+        return;
+      }
       let errorMessage = '❌ Login failed. Please try again.';
-      if (error?.response?.status === 401) {
-        errorMessage = '❌ Invalid UID or password';
-      } else if (error?.response?.status === 404) {
-        errorMessage = '❌ Account not found';
-      } else if (error?.message) {
+      if (error?.message) {
         errorMessage = `❌ ${error.message}`;
       }
+      toast.dismiss(loadingToast);
       toast.error(errorMessage, {
         duration: 4000,
         style: {

@@ -1,3 +1,4 @@
+// stray jsx causing syntax error
 import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
@@ -346,82 +347,20 @@ const ParticleField: React.FC = () => {
 const PremiumHomepage: React.FC = () => {
   const navigate = useNavigate();
   const { scrollY } = useScroll();
-  const [isLoading, setIsLoading] = useState(true);
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-  
   // Parallax transforms
   const y1 = useTransform(scrollY, [0, 300], [0, -100]);
   const y2 = useTransform(scrollY, [0, 500], [0, -150]);
   const opacity = useTransform(scrollY, [0, 200], [1, 0.3]);
   const scale = useTransform(scrollY, [0, 300], [1, 0.8]);
-  
   // Mouse tracking
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       setMousePos({ x: e.clientX, y: e.clientY });
     };
-    
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
-  
-  // Loading sequence
-  useEffect(() => {
-    const timer = setTimeout(() => setIsLoading(false), 3000);
-    return () => clearTimeout(timer);
-  }, []);
-
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-black flex items-center justify-center overflow-hidden">
-        <MatrixRain />
-        <div className="text-center z-10">
-          <motion.div
-            className="relative mb-8"
-            animate={{ rotateY: 360 }}
-            transition={{ duration: 3, repeat: Infinity, ease: "linear" }}
-          >
-            <div className="w-32 h-32 border-4 border-cyan-400 border-t-transparent rounded-full animate-spin"></div>
-            <div className="absolute top-4 left-4 w-24 h-24 border-4 border-purple-500 border-r-transparent rounded-full animate-spin" style={{ animationDirection: 'reverse', animationDuration: '2s' }}></div>
-            <div className="absolute top-8 left-8 w-16 h-16 border-2 border-pink-500 border-b-transparent rounded-full animate-spin" style={{ animationDuration: '1s' }}></div>
-          </motion.div>
-          
-          <GlitchText className="text-8xl font-black mb-6 bg-gradient-to-r from-cyan-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-            ACADMATE
-          </GlitchText>
-          
-          <motion.p
-            className="text-2xl text-cyan-400"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: [0, 1, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-          >
-            🚀 Loading Premium CGI Experience...
-          </motion.p>
-          
-          <motion.div
-            className="flex justify-center space-x-2 mt-8"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
-          >
-            {[0, 0.2, 0.4].map((delay, i) => (
-              <motion.div
-                key={i}
-                className="w-4 h-4 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"
-                animate={{ y: [0, -20, 0], opacity: [0.5, 1, 0.5] }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  delay: delay
-                }}
-              />
-            ))}
-          </motion.div>
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-black text-white overflow-hidden relative">
@@ -686,7 +625,7 @@ const PremiumHomepage: React.FC = () => {
       </section>
       
       {/* Custom Styles */}
-      <style jsx>{`
+  <style>{`
         @keyframes morphing {
           0% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
           50% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
