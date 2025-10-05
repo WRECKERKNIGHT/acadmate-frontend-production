@@ -24,9 +24,8 @@ import {
   Target,
   Award
 } from 'lucide-react'
-import { testAPI } from '../../config/api'
-import { useAuth } from '../../contexts/AuthContext'
-import toast from 'react-hot-toast'
+import { useAuth } from '../../context/AuthContext'
+import { toast } from 'react-hot-toast'
 
 interface OfflineTest {
   id: string
