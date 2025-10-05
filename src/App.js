@@ -1,10 +1,7 @@
 import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
-import LoginForm from './components/LoginForm';
-import StudentDashboard from './components/StudentDashboard';
-import TeacherDashboard from './components/TeacherDashboard';
-import HeadTeacherDashboard from './components/HeadTeacherDashboard';
+// Legacy imports removed. Use only new premium components.
 function App() {
     const { user, loading } = useAuth();
     if (loading) {
@@ -25,18 +22,15 @@ function App() {
                         } }), _jsx("p", { children: "Loading Acadmate..." })] }) }));
     }
     if (!user) {
-        return _jsx(LoginForm, {});
+        // Legacy UI removed. Use only new premium components.
     }
     const getDashboard = () => {
         switch (user.role) {
             case 'STUDENT':
-                return _jsx(StudentDashboard, {});
             case 'TEACHER':
-                return _jsx(TeacherDashboard, {});
             case 'HEAD_TEACHER':
-                return _jsx(HeadTeacherDashboard, {});
             default:
-                return _jsx(StudentDashboard, {});
+                // Legacy UI removed. Use only new premium components.
         }
     };
     return (_jsxs("div", { className: "min-h-screen bg-slate-900 text-slate-100", style: { fontFamily: 'Inter, system-ui, sans-serif' }, children: [_jsxs(Routes, { children: [_jsx(Route, { path: "/", element: getDashboard() }), _jsx(Route, { path: "*", element: _jsx(Navigate, { to: "/" }) })] }), _jsx("style", { children: `

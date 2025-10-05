@@ -51,6 +51,11 @@ interface ClassSession {
 }
 
 const TeacherDashboard: React.FC = () => {
+  // Premium animated background effect
+  useEffect(() => {
+    document.body.classList.add('premium-dashboard-bg');
+    return () => document.body.classList.remove('premium-dashboard-bg');
+  }, []);
   const { user } = useAuth();
   const [currentTime, setCurrentTime] = useState(new Date());
   const [activeTab, setActiveTab] = useState('overview');
@@ -172,65 +177,83 @@ const TeacherDashboard: React.FC = () => {
 
   return (
     <div className="min-h-screen bg-black text-white relative overflow-hidden">
+      {/* 3D/CGI Spline Hero */}
+      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 mt-2 z-10 w-full max-w-3xl pointer-events-none">
+        <iframe
+          src="https://prod.spline.design/6Q2QwQv7nQw6QwQw/scene.splinecode"
+          title="3D CGI Dashboard Hero"
+          frameBorder="0"
+          width="100%"
+          height="260"
+          style={{ borderRadius: '2rem', boxShadow: '0 0 80px #00fff7', background: 'transparent', filter: 'drop-shadow(0 0 40px #00fff7) blur(0.5px)' }}
+          allowFullScreen
+        />
+      </div>
+      {/* Animated Neon Gradient Background */}
+      <div className="absolute inset-0 z-0 pointer-events-none animate-gradient-x bg-gradient-to-br from-cyan-900/60 via-purple-900/60 to-black/80 opacity-80" />
+      {/* Glassmorphism Overlay */}
+      <div className="absolute inset-0 z-0 pointer-events-none backdrop-blur-2xl" />
       <ParticleBackground />
+      {/* All dashboard content above overlays */}
+      <div className="relative z-20">
       
-      {/* Hero Section */}
-      <motion.div 
-        initial={{ opacity: 0, y: -50 }}
-        animate={{ opacity: 1, y: 0 }}
-        className="relative z-10 pt-8 pb-12"
-      >
-        <div className="max-w-7xl mx-auto px-6">
-          {/* Header */}
-          <div className="flex justify-between items-center mb-8">
-            <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.2 }}
-            >
-              <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-                Welcome, {user?.name || 'Professor'} 👨‍🏫
-              </h1>
-              <p className="text-gray-400 mt-2">
-                {currentTime.toLocaleDateString('en-US', { 
-                  weekday: 'long', 
-                  year: 'numeric', 
-                  month: 'long', 
-                  day: 'numeric' 
-                })}
-              </p>
-            </motion.div>
+        {/* Hero Section and all dashboard content */}
+        <motion.div 
+          initial={{ opacity: 0, y: -50 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="relative z-10 pt-8 pb-12"
+        >
+          <div className="max-w-7xl mx-auto px-6">
+            {/* Header */}
+            <div className="flex justify-between items-center mb-8">
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <h1 className="text-4xl font-bold bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+                  Welcome, {user?.name || 'Professor'} 👨‍🏫
+                </h1>
+                <p className="text-gray-400 mt-2">
+                  {currentTime.toLocaleDateString('en-US', { 
+                    weekday: 'long', 
+                    year: 'numeric', 
+                    month: 'long', 
+                    day: 'numeric' 
+                  })}
+                </p>
+              </motion.div>
 
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ delay: 0.3 }}
-              className="flex items-center space-x-4"
-            >
-              <div className="bg-black/50 backdrop-blur-xl border border-purple-500/30 rounded-xl px-4 py-2">
-                <div className="text-purple-400 font-mono text-lg">
-                  {currentTime.toLocaleTimeString()}
+              <motion.div
+                initial={{ opacity: 0, x: 50 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 0.3 }}
+                className="flex items-center space-x-4"
+              >
+                <div className="bg-black/50 backdrop-blur-xl border border-purple-500/30 rounded-xl px-4 py-2">
+                  <div className="text-purple-400 font-mono text-lg">
+                    {currentTime.toLocaleTimeString()}
+                  </div>
                 </div>
-              </div>
-              
-              <motion.button
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.9 }}
-                className="relative p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl"
-              >
-                <Bell size={20} />
-                <motion.div
-                  animate={{ scale: [1, 1.2, 1] }}
-                  transition={{ repeat: Infinity, duration: 2 }}
-                  className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"
-                />
-              </motion.button>
+                
+                <motion.button
+                  whileHover={{ scale: 1.1 }}
+                  whileTap={{ scale: 0.9 }}
+                  className="relative p-3 bg-gradient-to-r from-purple-500 to-pink-500 rounded-xl"
+                >
+                  <Bell size={20} />
+                  <motion.div
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ repeat: Infinity, duration: 2 }}
+                    className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"
+                  />
+                </motion.button>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-4 py-2 bg-gradient-to-r from-green-500 to-cyan-500 rounded-xl font-semibold text-sm"
-              >
+                <motion.button
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="px-4 py-2 bg-gradient-to-r from-green-500 to-cyan-500 rounded-xl font-semibold text-sm"
+                >
                 Start Class
               </motion.button>
             </motion.div>
@@ -687,8 +710,9 @@ const TeacherDashboard: React.FC = () => {
           </AnimatePresence>
         </div>
       </motion.div>
-    </div>
+          </div>
+        </div>
   );
-};
+}
 
 export default TeacherDashboard;

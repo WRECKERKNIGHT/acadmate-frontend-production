@@ -389,12 +389,25 @@ const EnhancedLoginForm: React.FC = () => {
   return (
     <div className="min-h-screen bg-black text-white flex items-center justify-center relative overflow-hidden">
       <LoginParticles />
-      
+
+      {/* 3D/CGI Animated Student Illustration */}
+      <div className="absolute top-0 left-1/2 transform -translate-x-1/2 mt-10 z-10 w-full max-w-xl pointer-events-none">
+        <iframe
+          src="https://prod.spline.design/4Q2QwQv7nQw6QwQw/scene.splinecode"
+          title="3D Student Animation"
+          frameBorder="0"
+          width="100%"
+          height="340"
+          style={{ borderRadius: '2rem', boxShadow: '0 0 80px #00fff7', background: 'transparent', filter: 'drop-shadow(0 0 40px #00fff7) blur(0.5px)' }}
+          allowFullScreen
+        />
+      </div>
+
       {/* Back to home button */}
       <motion.button
         onClick={() => navigate('/')}
-        className="fixed top-6 left-6 z-50 px-4 py-2 bg-black/50 backdrop-blur-xl border border-cyan-500/30 rounded-xl text-cyan-400 hover:bg-cyan-500/10 transition-all duration-300"
-        whileHover={{ scale: 1.05 }}
+        className="fixed top-6 left-6 z-50 px-4 py-2 bg-black/50 backdrop-blur-xl border border-cyan-500/30 rounded-xl text-cyan-400 hover:bg-cyan-500/10 transition-all duration-300 shadow-[0_0_20px_#00fff7] hover:shadow-[0_0_40px_#00fff7]"
+        whileHover={{ scale: 1.08, rotate: 2 }}
         whileTap={{ scale: 0.95 }}
         initial={{ x: -100, opacity: 0 }}
         animate={{ x: 0, opacity: 1 }}

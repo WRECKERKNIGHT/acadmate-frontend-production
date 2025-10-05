@@ -503,23 +503,22 @@ const PremiumHomepage: React.FC = () => {
               </motion.div>
             ))}
           </motion.div>
-        </div>
-      </motion.section>
-        {/* Scroll Indicator */}
-        <motion.div
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-          animate={{ y: [0, 15, 0] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-        >
-          <div className="w-8 h-12 border-2 border-cyan-400 rounded-full flex justify-center pt-2">
-            <motion.div 
-              className="w-1 h-3 bg-cyan-400 rounded-full"
-              animate={{ y: [0, 16, 0] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            />
-          </div>
-        </motion.div>
-      </motion.section>
+          </div> {/* <-- Close the Hero section's main content div */}
+        	{/* Scroll Indicator */}
+        	<motion.div
+        	  className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
+        	  animate={{ y: [0, 15, 0] }}
+        	  transition={{ repeat: Infinity, duration: 2 }}
+        	>
+        	  <div className="w-8 h-12 border-2 border-cyan-400 rounded-full flex justify-center pt-2">
+        		<motion.div 
+        		  className="w-1 h-3 bg-cyan-400 rounded-full"
+        		  animate={{ y: [0, 16, 0] }}
+        		  transition={{ repeat: Infinity, duration: 2 }}
+        		/>
+        	  </div>
+        	</motion.div>
+        </motion.section>
       
       {/* Features Section */}
       <motion.section 
