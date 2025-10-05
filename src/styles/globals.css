@@ -191,8 +191,6 @@ body {
 }
 
 /* Card utility classes */
-  height: 8px;
-}
 
 ::-webkit-scrollbar-track {
   background: var(--color-bg-secondary);
