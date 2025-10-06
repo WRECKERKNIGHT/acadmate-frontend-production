@@ -77,6 +77,8 @@ function AppContent() {
               </ProtectedRoute>
             } 
           />
+          {/* Fallback route: always show premium homepage if no match */}
+          <Route path="*" element={<PremiumHomepage />} />
         </Routes>
       </AnimatePresence>
     </div>
